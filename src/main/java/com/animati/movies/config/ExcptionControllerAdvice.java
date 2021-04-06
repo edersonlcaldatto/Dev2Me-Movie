@@ -1,6 +1,6 @@
-package config;
+package com.animati.movies.config;
 
-import controller.data.response.Error;
+import com.animati.movies.controller.data.response.Error;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,6 +1,6 @@
-package service;
+package com.animati.movies.service;
 
-import model.Movie;
+import com.animati.movies.model.Movie;
 
 public interface MovieService {
 

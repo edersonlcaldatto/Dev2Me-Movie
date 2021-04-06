@@ -1,4 +1,4 @@
-package controller.data.response;
+package com.animati.movies.controller.data.response;
 
 import org.springframework.lang.NonNull;
 

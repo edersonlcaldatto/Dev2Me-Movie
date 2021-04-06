@@ -1,22 +1,53 @@
-package controller.data.request;
+package com.animati.movies.model;
 
-import model.MovieType;
+import com.sun.istack.NotNull;
 
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Objects;
 
-public class MoviePersistDto {
+@Entity
+public class Movie {
 
-    @NotEmpty
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-    @NotEmpty
     private MovieType movieType;
-    @NotEmpty
     private String language;
     private String list;
     private String synopsis;
     private String trailer;
     private String banner;
     private String gender;
+
+    @Deprecated
+    public Movie() {
+    }
+
+    public Movie(@NotNull String name, @NotNull  MovieType movieType, @NotNull String language, String list,
+            String synopsis,
+            String trailer,
+            String banner, String gender) {
+        this.name = Objects.requireNonNull(name);
+        this.movieType = Objects.requireNonNull(movieType);
+        this.language = Objects.requireNonNull(language);
+        this.list = list;
+        this.synopsis = synopsis;
+        this.trailer = trailer;
+        this.banner = banner;
+        this.gender = gender;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

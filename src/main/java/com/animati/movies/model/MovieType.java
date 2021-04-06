@@ -1,4 +1,4 @@
-package model;
+package com.animati.movies.model;
 
 public enum MovieType {
 

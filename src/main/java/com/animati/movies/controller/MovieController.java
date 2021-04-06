@@ -1,18 +1,18 @@
-package controller;
+package com.animati.movies.controller;
 
-import controller.data.request.MoviePersistDto;
-import controller.data.response.MovieResponseDto;
-import model.Movie;
+import com.animati.movies.controller.data.request.MoviePersistDto;
+import com.animati.movies.model.Movie;
+import com.animati.movies.service.MovieService;
+import com.animati.movies.controller.data.response.MovieResponseDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import service.MovieService;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/movies")
+@RequestMapping("/api/v1/movies")
 public class MovieController {
 
     private final MovieService movieService;

@@ -1,8 +1,8 @@
-package service;
+package com.animati.movies.service;
 
-import model.Movie;
+import com.animati.movies.repository.MovieRepository;
+import com.animati.movies.model.Movie;
 import org.springframework.stereotype.Service;
-import repository.MovieRepository;
 
 import javax.persistence.NoResultException;
 
