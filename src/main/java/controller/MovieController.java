@@ -1,38 +1,57 @@
 package controller;
 
+import controller.data.request.MoviePersistDto;
+import controller.data.response.MovieResponseDto;
 import model.Movie;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import service.MovieService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("api/v1/movies")
 public class MovieController {
 
+    private final MovieService movieService;
 
-    @GetMapping("/movies")
-    public List<Movie> getAll(){
+    private ModelMapper modelMapper;
+
+    public MovieController(MovieService movieService, ModelMapper modelMapper) {
+        this.movieService = movieService;
+        this.modelMapper = modelMapper;
+    }
+
+    public MovieController(MovieService movieService) {this.movieService = movieService;}
+
+    @GetMapping()
+    public List<MovieResponseDto> getAll(){
         return null;
     }
 
-    @GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> getById(@PathVariable(value = "id") Long movieId){
+    @GetMapping("/{id}")
+    public MovieResponseDto getById(@PathVariable("id") Long movieId){
+        Movie movie = movieService.getOne(movieId);
+        return modelMapper.map(movie, MovieResponseDto.class);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public MovieResponseDto create(@Valid @RequestBody MoviePersistDto dto){
+        Movie movie = modelMapper.map(dto, Movie.class);
+        Movie moviePersitido = movieService.create(movie);
+        return modelMapper.map(moviePersitido, MovieResponseDto.class);
+    }
+
+    @PutMapping("/{id}")
+    public MovieResponseDto update(@PathVariable(value = "id") long movieId,
+            @RequestBody MoviePersistDto movieDetails){
         return null;
     }
 
-    @PostMapping("/movies")
-    public Movie create(@RequestBody Movie movie){
-        return null;
-    }
-
-    @PutMapping("/movies/{id}")
-    public ResponseEntity<Movie> update(@PathVariable(value = "id") long movieId, @RequestBody Movie movieDetails){
-        return null;
-    }
-
-    @PutMapping("/movies/{id}")
+    @PutMapping("/{id}")
     public void delete(@PathVariable(value = "id") Long movieId) throws Exception {
 
     }
