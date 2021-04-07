@@ -1,5 +1,6 @@
 package com.animati.movies.controller.data.request;
 
+import com.animati.movies.model.Movie;
 import com.animati.movies.model.MovieType;
 
 import javax.validation.constraints.NotEmpty;
@@ -8,15 +9,21 @@ public class MoviePersistDto {
 
     @NotEmpty
     private String name;
-    @NotEmpty
     private MovieType movieType;
-    @NotEmpty
     private String language;
     private String list;
     private String synopsis;
     private String trailer;
     private String banner;
     private String gender;
+
+
+    public Movie convert(long movieId){
+        Movie movie = new Movie(movieId,  this.name, this.getMovieType(),
+                this.getLanguage(), this.getList(), this.getSynopsis(),
+                this.getTrailer(), this.getBanner(),this.getGender());
+        return movie;
+    }
 
     public String getName() {
         return name;

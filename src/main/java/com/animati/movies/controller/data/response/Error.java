@@ -1,19 +1,24 @@
 package com.animati.movies.controller.data.response;
 
 import org.springframework.lang.NonNull;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 public class Error {
 
-    private String codigo;
-    private String mensagem;
-    private String documentacao;
+    private final String codigo;
+    private final String mensagem;
+    private final String documentacao;
 
-    public Error(@NonNull String codigo, @NonNull String mensagem) {
+    public Error(@NonNull String codigo, @NonNull String mensagem, @NonNull String urlDocumentation) {
         this.codigo = Objects.requireNonNull(codigo);
         this.mensagem = Objects.requireNonNull(mensagem);
-        //todo
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "");
+        documentacao = url + urlDocumentation;
     }
 
     public String getCodigo() {

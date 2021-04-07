@@ -2,10 +2,7 @@ package com.animati.movies.model;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +12,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private MovieType movieType;
     private String language;
     private String list;
@@ -25,6 +23,22 @@ public class Movie {
 
     @Deprecated
     public Movie() {
+    }
+
+    public Movie(@NotNull Long id, @NotNull String name, @NotNull  MovieType movieType, @NotNull String language,
+            String list,
+            String synopsis,
+            String trailer,
+            String banner, String gender) {
+        this.id = Objects.requireNonNull(id,"Id é Obrigatório");
+        this.name = Objects.requireNonNull(name);
+        this.movieType = Objects.requireNonNull(movieType);
+        this.language = Objects.requireNonNull(language);
+        this.list = list;
+        this.synopsis = synopsis;
+        this.trailer = trailer;
+        this.banner = banner;
+        this.gender = gender;
     }
 
     public Movie(@NotNull String name, @NotNull  MovieType movieType, @NotNull String language, String list,
@@ -41,13 +55,23 @@ public class Movie {
         this.gender = gender;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return id.equals(movie.id) && name.equals(movie.name);
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
