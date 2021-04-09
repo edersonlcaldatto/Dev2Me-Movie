@@ -6,9 +6,11 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
 
+@JsonComponent
 public class MovieSerealization extends JsonSerializer<Movie> {
 
     private final ModelMapper modelMapper;
